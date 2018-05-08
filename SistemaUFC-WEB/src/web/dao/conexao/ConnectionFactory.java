@@ -15,7 +15,7 @@ public class ConnectionFactory {
 	private static ConnectionFactory instancia;
 	
 	private final String DRIVE = "com.mysql.jdbc.Driver";
-	private final String URL = "jdbc:mysql://localhost/NOME_DO_BANCO"; 
+	private final String URL = "jdbc:mysql://localhost/sistemaru"; 
 	private final String USER = "root";
 	private final String PASSWORD = "";
 	
