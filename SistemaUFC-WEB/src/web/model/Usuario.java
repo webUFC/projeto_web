@@ -5,8 +5,9 @@ public class Usuario {
 	private String nomeUser;
 	private int matricula;
 	private Tipo tipo;
-	private Carteira idCarteira;
+	private Carteira carteira;
 	private Validacao validacao;
+	private String senha;
 	private boolean status;
 	
 	public int getIdUser() {
@@ -33,11 +34,11 @@ public class Usuario {
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-	public Carteira getIdCarteira() {
-		return idCarteira;
+	public Carteira getCarteira() {
+		return carteira;
 	}
-	public void setIdCarteira(Carteira idCarteira) {
-		this.idCarteira = idCarteira;
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
 	public Validacao getValidacao() {
 		return validacao;
@@ -45,10 +46,16 @@ public class Usuario {
 	public void setValidacao(Validacao validacao) {
 		this.validacao = validacao;
 	}
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }

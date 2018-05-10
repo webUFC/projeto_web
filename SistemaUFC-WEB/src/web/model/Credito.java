@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import web.dao.CreditoDAO;
+import web.dao.UsuarioDAO;
 
 public class Credito {
 	

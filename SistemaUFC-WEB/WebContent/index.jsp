@@ -12,7 +12,6 @@
 	<% 
 	
 		AlimentoDAO a = new AlimentoDAO();
-	a.teste();
 	
 	%>
 </body>
