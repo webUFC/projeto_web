@@ -1,7 +1,5 @@
 package web.dao;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import web.dao.conexao.ConnectionFactory;
-import web.model.Carteira;
 import web.model.Tipo;
 import web.model.Usuario;
 
 public class UsuarioDAO {
+	private static UsuarioDAO instance;
+	
+	public static UsuarioDAO getInstance() {
+		if(instance == null) instance = new UsuarioDAO();
+		return instance;
+	}
 	
 	/**
 	 * <html>
@@ -60,22 +63,14 @@ public class UsuarioDAO {
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuario");
 			ResultSet result = ps.executeQuery();
 			while(result.next()) {
-				int ID = result.getInt(1);
-				String nome = result.getString(2);
-				int matricula = result.getInt(3);
-				Tipo tipo = Tipo.values()[result.getInt(4)];
-				String senha = result.getString(5);
-				boolean status = result.getBoolean(6);
-				Carteira c = new CarteiraDAO().buscarCarteira(result.getInt(7));
-				
 				Usuario tempUser = new Usuario();
-				tempUser.setIdUser(ID);
-				tempUser.setNomeUser(nome);
-				tempUser.setMatricula(matricula);
-				tempUser.setTipo(tipo);
-				tempUser.setSenha(senha);
-				tempUser.setStatus(status);
-				tempUser.setCarteira(c);
+				tempUser.setIdUser(result.getInt(1));
+				tempUser.setNomeUser(result.getString(2));
+				tempUser.setMatricula(result.getInt(3));
+				tempUser.setTipo(Tipo.values()[result.getInt(4)]);
+				tempUser.setSenha(result.getString(5));
+				tempUser.setStatus(result.getBoolean(6));
+				tempUser.setCarteira(CarteiraDAO.getInstance().buscarCarteira(result.getInt(7)));
 				usuarios.add(tempUser);
 			}
 		}catch(Exception e) {
