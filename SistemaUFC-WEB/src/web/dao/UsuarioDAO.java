@@ -78,4 +78,27 @@ public class UsuarioDAO {
 		}
 		return usuarios;
 	}
+	
+	/**
+	 * <p>Atualiza os dados de um Usuário no BD</p>
+	 * <p><u>O ID do usuário terá que ser idêntico ao do BD</u></p>
+	 * </html>
+	 */
+	
+	public void atualizarUser(Usuario user) {
+		try {
+			Connection conn = ConnectionFactory.getInstancia().getConnection();
+			PreparedStatement ps = conn.prepareStatement("UPDATE usuario SET nomeUsuario='?',matricula='?',idTipo='?',hashSenha='?',ativo='?',idCarteira='?' WHERE id='?'");
+			ps.setString(1, user.getNomeUser());
+			ps.setInt(2, user.getMatricula());
+			ps.setInt(3, user.getTipo().ordinal());
+			ps.setString(4, user.getSenha());
+			ps.setBoolean(5, user.getStatus());
+			ps.setInt(6, user.getCarteira().getIdCarteira());
+			ps.setInt(7, user.getIdUser());
+			ps.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
