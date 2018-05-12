@@ -32,9 +32,7 @@ public class Credito {
 	}
 	
 	public float calcularCredito(int qnt, Tipo tipo) {
-		/*
-		 * fazer depois
-		 * */
+		valorUnitario = credito.valorCredito(tipo);
 		
 		return valorUnitario;
 	}
