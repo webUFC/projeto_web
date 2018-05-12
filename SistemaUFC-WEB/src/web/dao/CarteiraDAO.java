@@ -9,6 +9,13 @@ import web.model.Carteira;
 
 public class CarteiraDAO {
 	
+	private static CarteiraDAO instance;
+	
+	public static CarteiraDAO getInstance() {
+		if(instance == null) instance = new CarteiraDAO();
+		return instance;
+	}
+	
 	public Carteira buscarCarteira(int id) {
 		try {
 			Connection conn = ConnectionFactory.getInstancia().getConnection();
