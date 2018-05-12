@@ -27,8 +27,13 @@ public class Credito {
 		}
 	}
 	
-	public void alterarCredito(float valor) {
-		
+	public void alterarCredito(Tipo tipo, float valor) {
+		Credito cred = new Credito(tipo, valor);
+		try {
+			credito.modificarCredito(cred);
+		} catch (Exception e) {
+			 Logger.getLogger(Credito.class.getName()).log(Level.SEVERE, null, e);
+		}
 	}
 	
 	public float calcularCredito(int qnt, Tipo tipo) {

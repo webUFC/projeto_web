@@ -27,9 +27,9 @@ public class AlimentoDAO {
 		String sql = "INSERT INTO alimento (categoria,nomeAliment, valorNutri) VALUES (?, ?, ?)";
 		try {
 			PreparedStatement prepare = con.prepareStatement(sql);
-			prepare.setInt(1, (int) novoAlimento.getCategoria().getIdCategoria());
+		//	prepare.setInt(1, (int) novoAlimento.getCategoria().getIdCategoria());
 			prepare.setString(2, novoAlimento.getNome());
-			prepare.setInt(3, novoAlimento.getInfoNutricional().getIdInfoNutricional());
+		//	prepare.setInt(3, novoAlimento.getInfoNutricional().getIdInfoNutricional());
 			
 			prepare.execute();
 			

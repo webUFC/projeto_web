@@ -66,6 +66,21 @@ private static CreditoDAO instancia;
 		
 		return valor;
 	}
+	
+	public void modificarCredito(Credito credito) {
+		Connection con = dao.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			stmt = con.prepareStatement("INSERIR AQUI");
+			stmt.setString(1, credito.getTipoUser().getTipo());
+			stmt.setFloat(2, credito.getValorUnitario());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			Logger.getLogger(CreditoDAO.class.getName()).log(Level.SEVERE, null, e);
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);	
+		}
+	}
 
 	
 }
