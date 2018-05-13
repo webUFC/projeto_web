@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import web.dao.CreditoDAO;
-import web.dao.UsuarioDAO;
 
 public class Credito {
 	
@@ -16,6 +15,10 @@ public class Credito {
 	public Credito(Tipo usuario, float valor) {
 		this.setTipoUser(usuario);
 		this.setValorUnitario(valor);
+		
+	}
+	
+	public Credito() {
 		
 	}
 	
@@ -36,10 +39,28 @@ public class Credito {
 		}
 	}
 	
+	public float valorCredito(Tipo tipo) {
+		float temp = 0;
+		try {
+			temp = credito.valorCredito(tipo);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return temp;
+	}
+	
 	public float calcularCredito(int qnt, Tipo tipo) {
-		valorUnitario = credito.valorCredito(tipo);
+		float temp = 0;
+		try {
+			valorUnitario = credito.valorCredito(tipo);
+			temp = valorUnitario * 5;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		return valorUnitario;
+		
+		
+		return temp;
 	}
 	
 	

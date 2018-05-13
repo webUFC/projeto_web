@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import java.sql.Connection;
 import web.dao.conexao.ConnectionFactory;
@@ -32,11 +31,12 @@ private static CreditoDAO instancia;
 	public void categoriaCredito(Credito credito) {
 		Connection con = dao.getConnection();
 		PreparedStatement stmt = null;
-
 		try {
-			stmt = con.prepareStatement("INSERIR AQUI");
-			stmt.setString(1, credito.getTipoUser().getTipo());
+			stmt = con.prepareStatement("INSERT INTO CREDITO (tipoCred, valorUnit) VALUES (?,?)");
+			stmt.setString(1, credito.getTipoUser().getTipo().toString());
+			System.out.println(credito.getTipoUser().getTipo().toString());
 			stmt.setFloat(2, credito.getValorUnitario());
+			System.out.println(credito.getValorUnitario());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			Logger.getLogger(CreditoDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -52,12 +52,11 @@ private static CreditoDAO instancia;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			stmt = con.prepareStatement("INSERIR CONSULTA");
+			stmt = con.prepareStatement("SELECT valorUnit FROM CREDITO WHERE tipoCred = '" + tipo.getTipo() + "';");
 			result = stmt.executeQuery();
 			while(result.next()) {
 				valor = result.getFloat(1);	
 			}
-			
 		} catch (Exception e) {
 			Logger.getLogger(CreditoDAO.class.getName()).log(Level.SEVERE, null, e);
 		}finally {
@@ -71,9 +70,7 @@ private static CreditoDAO instancia;
 		Connection con = dao.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = con.prepareStatement("INSERIR AQUI");
-			stmt.setString(1, credito.getTipoUser().getTipo());
-			stmt.setFloat(2, credito.getValorUnitario());
+			stmt = con.prepareStatement("UPDATE CREDITO SET valorUnit =" + credito.getValorUnitario() + " WHERE tipoCred = '" +credito.getTipoUser().toString() +"';");
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			Logger.getLogger(CreditoDAO.class.getName()).log(Level.SEVERE, null, e);
