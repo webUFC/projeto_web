@@ -73,6 +73,7 @@ public class UsuarioDAO {
 				tempUser.setCarteira(CarteiraDAO.getInstance().buscarCarteira(result.getInt(7)));
 				usuarios.add(tempUser);
 			}
+			ConnectionFactory.closeConnection(conn, ps);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -97,8 +98,64 @@ public class UsuarioDAO {
 			ps.setInt(6, user.getCarteira().getIdCarteira());
 			ps.setInt(7, user.getIdUser());
 			ps.execute();
+			ConnectionFactory.closeConnection(conn, ps);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Busca um usuário pela matrícula.
+	 * @param matricula : Matrícula do usuário
+	 * @return Usuario se encontrado!
+	 */
+	
+	public Usuario pesquisarUser(int matricula) {
+		try {
+			Connection conn = ConnectionFactory.getInstancia().getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuario");
+			ResultSet result = ps.executeQuery();
+			Usuario tempUser = null;
+			if(result.next()) {
+				tempUser = new Usuario();
+				tempUser.setIdUser(result.getInt(1));
+				tempUser.setNomeUser(result.getString(2));
+				tempUser.setMatricula(result.getInt(3));
+				tempUser.setTipo(Tipo.values()[result.getInt(4)]);
+				tempUser.setSenha(result.getString(5));
+				tempUser.setStatus(result.getBoolean(6));
+				tempUser.setCarteira(CarteiraDAO.getInstance().buscarCarteira(result.getInt(7)));
+			}
+			ConnectionFactory.closeConnection(conn, ps);
+			return tempUser;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Exclui o Usuário com a matricula informada.
+	 * @param matricula
+	 */
+	
+	public void excluirUser(int matricula) {
+		try {
+			Connection conn = ConnectionFactory.getInstancia().getConnection();
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM usuario WHERE matricula = '?'");
+			ps.setInt(1,matricula);
+			ps.execute();
+			ConnectionFactory.closeConnection(conn,ps);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * NÃO IMPLEMENTADO AINDA.
+	 */
+	
+	public void importarUser() {
+		
 	}
 }
