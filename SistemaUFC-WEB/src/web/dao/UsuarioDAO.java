@@ -135,6 +135,39 @@ public class UsuarioDAO {
 	}
 	
 	/**
+	 * Busca um usuário pelo nome e senha.
+	 * @param nome
+	 * @param senha
+	 * @return
+	 */
+	
+	public Usuario pesquisarUser(String nome, String senha) {
+		try {
+			Connection conn = ConnectionFactory.getInstancia().getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuario WHERE nomeUsuario = ? AND hashSenha = ?");
+			ps.setString(1, nome);
+			ps.setString(2, senha);
+			ResultSet result = ps.executeQuery();
+			Usuario tempUser = null;
+			if(result.next()) {
+				tempUser = new Usuario();
+				tempUser.setIdUser(result.getInt(1));
+				tempUser.setNomeUser(result.getString(2));
+				tempUser.setMatricula(result.getInt(3));
+				tempUser.setTipo(Tipo.values()[result.getInt(4)]);
+				tempUser.setSenha(result.getString(5));
+				tempUser.setStatus(result.getBoolean(6));
+				tempUser.setCarteira(CarteiraDAO.getInstance().buscarCarteira(result.getInt(7)));
+			}
+			ConnectionFactory.closeConnection(conn, ps);
+			return tempUser;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
 	 * Exclui o Usuário com a matricula informada.
 	 * @param matricula
 	 */

@@ -32,9 +32,8 @@ public class ConnectionFactory {
 	
 	public Connection getConnection(){
 		try {
-			Class.forName(DRIVE);
-			return DriverManager.getConnection(URL, USER, PASSWORD);
-			
+				Class.forName(DRIVE);
+				return DriverManager.getConnection(URL, USER, PASSWORD);
 			} catch (SQLException | ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
@@ -47,7 +46,7 @@ public class ConnectionFactory {
                 con.close();
             }
         } catch (SQLException ex) {
-                Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -60,7 +59,7 @@ public class ConnectionFactory {
                 stmt.close();
             }
         } catch (SQLException ex) {
-                Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -73,7 +72,7 @@ public class ConnectionFactory {
                 rs.close();
             }
         } catch (SQLException ex) {
-                Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

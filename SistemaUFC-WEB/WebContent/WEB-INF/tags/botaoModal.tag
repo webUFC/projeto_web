@@ -1,5 +1,5 @@
 <%@taglib prefix="chamaTag" tagdir="/WEB-INF/tags" %>
-<!-- <div class="row">
+ <div class="row">
 	<div class="col-xs-12">
 		<div class="box box-default">
 			<div class="box-header with-border">
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 </div>
--->
+
 
 <a href="" type="" class="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-user-plus"></i> Novo Usuario</a>
 

@@ -2,9 +2,6 @@ package web.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +29,7 @@ public class CategoriaDAO {
 		con = dao.getConnection();
 		stmt = null;
 		try {
-			stmt = con.prepareStatement("INSERT INTO CATEGORIA(nomeCategoria) VALUE(?)");
+			stmt = con.prepareStatement("INSERT INTO CATEGORIA (nomeCategoria) VALUE(?)");
 			stmt.setString(1, categoria.getNomeCategoria());
 		} catch (Exception e) {
 			Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -41,7 +38,7 @@ public class CategoriaDAO {
 		}
 	}
 	
-	public List<Categoria> listarCategoria() {
+	/*public List<Categoria> listarCategoria() {
 		List<Categoria> categoria = new ArrayList<Categoria>();
 		ResultSet resultado = null;
 		try {
@@ -60,7 +57,7 @@ public class CategoriaDAO {
 		}
 		
 		return categoria;
-	}
+	}*/
 	
 	public void excluirCategoria(Categoria categoria) {
 		con = dao.getConnection();
